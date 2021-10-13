@@ -2,20 +2,25 @@ package pageObjects;
 
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+
 public class LandingPage {
 
     public static String baseUrl = "https://www.hertz.bg/en/";
-    public static String user_email = "povir43693@oemmeo.com";
-    public static String user_password = "TestQA321";
 
     public static final By CLOSE_POP_UP = By.xpath("//body/div[@id='modalSplit']/div[1]/div[1]/div[1]/button[1]");
-    public static final By EMAIL_REQUIRED_WARNING_MESSAGE = By.xpath("//span[contains(text(),'The Email field is required.')]");
-    public static final By LOGIN_SUBMIT_BUTTON = By.xpath("//button[@id='login-form-submit']");
-    public static final By LOGIN_BUTTON = By.xpath("//span[contains(text(),'Login')]");
-    public static final By PASSWORD_REQUIRED_WARNING_MESSAGE = By.xpath("//span[contains(text(),'The Password field is required.')]");
-    public static final By EMAIL_FIELD = By.xpath("//input[@id='LoginEmail']");
-    public static final By PASSWORD_FIELD = By.xpath("//input[@id='LoginPassword']");
-    public static final By USER_PROFILE_NAME = By.xpath("//div[@id='dev-profile-displayName']");
+    public static final By ACCEPT_COOKIES = By.xpath("//*[@id='onetrust-accept-btn-handler']");
+    public static final By LOGIN_SIGNUP_PANEL = By.xpath("//div[@id='dev-login']"); //img[@alt='hertz_logo']
+    public static final By HERTZ_LOGO = By.xpath("//img[@alt='hertz_logo']");
 
 
+    public static void openLandingPage() {
+        open(baseUrl);
+        $(CLOSE_POP_UP).click();
+        $(ACCEPT_COOKIES).click();
+        $(LOGIN_SIGNUP_PANEL).shouldBe(visible);
+        $(HERTZ_LOGO).shouldBe(visible);
+    }
 }
